@@ -1,0 +1,35 @@
+afterEvaluate {
+    ext.execute = { command ->
+        exec {
+            commandLine = (Object[]) command.split(" ")
+            standardOutput = new ByteArrayOutputStream()
+            ignoreExitValue = true
+            ext.output = {
+                return standardOutput.toString()
+            }
+        }
+    }
+    List<String> tasks = ['itest']
+    if (tasks.size() > 0) {
+        Task dockerComposeUpTask = project.tasks.create("dockerComposeUp", DefaultTask.class, { t ->
+            t.doFirst {
+                if (file("docker-compose.yml").exists())
+                    project.execute("docker-compose up -d --remove-orphans")
+            }
+        })
+
+        Task dockerComposeDownTask = project.tasks.create("dockerComposeDown", DefaultTask.class, { t ->
+            t.doFirst {
+                if (file("docker-compose.yml").exists()) {
+                    project.execute("docker-compose down")
+                }
+
+            }
+        })
+        for (String task : tasks) {
+            Task currentTask = project.tasks.getByName(task)
+            currentTask.dependsOn(dockerComposeUpTask)
+            currentTask.finalizedBy(dockerComposeDownTask)
+        }
+    }
+}

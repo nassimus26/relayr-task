@@ -1,0 +1,117 @@
+version: '3.5'
+volumes:
+  mongodata_it:
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  mongodb-products-search:
+    image: mongo:latest
+    restart: always
+    container_name: "mongodb-products-search"
+    environment:
+      - MONGO_DATA_DIR=mongodata_it
+      - MONGO_LOG_DIR=/dev/null
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes:
+      - mongodata_it:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --port 27017 --bind_ip_all --logpath=/dev/null # --quiet
+  mongo-express:
+    image: mongo-express
+    container_name: "mongo-express"
+    restart: always
+    ports:
+      - 8090:8081
+    links:
+      - mongodb-products-search
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb-products-search
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=root
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=admin
+    depends_on:
+      - mongodb-products-search
+  products-search:
+    build:
+      context: ..
+      args:
+        service_name: service-products-search
+      dockerfile: ./docker-files/service
+    links:
+      - kafka
+      - mongodb-products-search
+    container_name: products-search-service
+    restart: on-failure
+    ports:
+      - "8081:8081"
+    environment:
+      - MONGODB_PORT=27017
+      - MONGODB_SCHEMA=products_search
+      - MONGODB_HOST=mongodb-products-search
+      - MONGO_INITDB_AUTH_DATABASE=admin
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - LOG_LEVEL=DEBUG
+      - SPRING_PROFILES_ACTIVE=prod
+      - KAFKA_HOST=kafka
+      - JAVA_OPTS=-Xmx600m -Xms256m
+    volumes:
+      - ../:/home/gradle
+    depends_on:
+      - mongodb-products-search
+      - kafka
+  suppliers-ranking:
+    build:
+      context: ..
+      args:
+        service_name: service-suppliers-ranking
+      dockerfile: ./docker-files/service
+    links:
+      - kafka
+    container_name: suppliers-rank-service
+    restart: on-failure
+    ports:
+      - "8181:8181"
+    environment:
+      - LOG_LEVEL=DEBUG
+      - SPRING_PROFILES_ACTIVE=prod
+      - KAFKA_HOST=kafka
+    volumes:
+      - ../:/home/gradle
+    depends_on:
+      - kafka
+  data-provider:
+    build:
+      context: ..
+      args:
+        service_name: service-data-provider
+      dockerfile: ./docker-files/service
+    links:
+      - kafka
+    container_name: data-provider-service
+    restart: on-failure
+    ports:
+      - "8281:8281"
+    environment:
+      - LOG_LEVEL=DEBUG
+      - SPRING_PROFILES_ACTIVE=prod
+      - KAFKA_HOST=kafka
+    volumes:
+      - ../:/home/gradle
+    depends_on:
+      - kafka

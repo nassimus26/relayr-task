@@ -1,0 +1,13 @@
+dependencies {
+    compileOnly "javax.servlet:javax.servlet-api:3.0.1"
+    implementation("org.springframework.boot:spring-boot-starter-test:${spring_boot_version}") {
+        exclude group: 'junit', module: 'junit'
+    }
+    implementation("org.codehaus.groovy:groovy:${groovy_version}") { force = true }
+    implementation("org.codehaus.groovy:groovy-json:${groovy_version}") { force = true }
+    implementation("org.codehaus.groovy:groovy-xml:${groovy_version}") { force = true }
+    implementation "io.rest-assured:rest-assured:${assertj_version}"
+    implementation "io.rest-assured:rest-assured-common:${assertj_version}"
+    implementation "io.rest-assured:json-path:${assertj_version}"
+    implementation "io.rest-assured:xml-path:${assertj_version}"
+}

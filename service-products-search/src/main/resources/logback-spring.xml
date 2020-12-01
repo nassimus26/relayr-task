@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+
+<configuration scan="true">
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <logger name="springfox.documentatione" level="WARN"/>
+    <logger name="org.springframework.data.mongodb.core.MongoTemplate" level="WARN"/>
+    <logger name="org.mongodb" level="WARN"/>
+    <logger name="org.apache.kafka" level="WARN"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.apache.kafka.clients.consumer.internals" level="WARN"/>
+    <logger name="com.relayr.task.products.search" level="DEBUG"/>
+    <root level="DEBUG">
+        <appender-ref ref="console"/>
+    </root>
+</configuration>
+

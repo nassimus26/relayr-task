@@ -1,0 +1,8 @@
+dependencies {
+    compile project(":lib-common-consts")
+    compile project(":lib-common-kafka-starter")
+    compile "org.springframework.boot:spring-boot-starter-data-mongodb"
+    compile "io.reactivex.rxjava3:rxjava:3.0.7"
+    compile "org.mapstruct:mapstruct:${mapstruct_version}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
+}

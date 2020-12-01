@@ -1,0 +1,10 @@
+rootProject.name = 'relayr-task'
+
+include 'lib-common-kafka-starter'
+include 'lib-common-consts'
+include 'lib-common-dtos'
+include 'lib-base-test'
+include 'service-data-provider'
+include 'service-products-search'
+include 'service-suppliers-ranking'
+include 'itests-all-services'

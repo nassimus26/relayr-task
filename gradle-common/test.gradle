@@ -1,0 +1,22 @@
+dependencies {
+    testAnnotationProcessor "org.projectlombok:lombok:${lombok_version}"
+    testCompile "org.mockito:mockito-core:3.6.28"
+    testCompile "org.hamcrest:hamcrest-library:2.2"
+    testCompile "org.assertj:assertj-core:3.18.1"
+    testImplementation ("org.codehaus.groovy:groovy:${groovy_version}") { force = true }
+    testImplementation ("org.codehaus.groovy:groovy-json:${groovy_version}") { force = true }
+    testImplementation ("org.codehaus.groovy:groovy-xml:${groovy_version}") { force = true }
+    testImplementation  "io.rest-assured:rest-assured:${assertj_version}"
+    testImplementation  "io.rest-assured:rest-assured-common:${assertj_version}"
+    testImplementation  "io.rest-assured:json-path:${assertj_version}"
+    testImplementation  "io.rest-assured:xml-path:${assertj_version}"
+    testImplementation (enforcedPlatform("org.junit:junit-bom:5.7.0"))
+    testImplementation "org.junit.jupiter:junit-jupiter-api"
+    testImplementation "org.junit.platform:junit-platform-launcher"
+    testImplementation "org.junit.jupiter:junit-jupiter-params"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+    testRuntimeOnly "org.junit.vintage:junit-vintage-engine"
+}
+tasks.withType(Test) {
+    useJUnitPlatform()
+}

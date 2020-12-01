@@ -1,0 +1,4 @@
+dependencies {
+    compile project(":lib-common-consts")
+    compile project(":lib-common-kafka-starter")
+}

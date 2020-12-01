@@ -1,0 +1,12 @@
+testSets {
+    itest
+}
+dependencies {
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'junit', module: 'junit'
+    }
+    testCompile project(":lib-base-test")
+}
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
