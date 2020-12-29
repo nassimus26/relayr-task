@@ -5,7 +5,7 @@
   <br>    
 </h1>    
     
-<h4 align="center">Solution for the [RELAYR Task](readme-resources/RELAYR-Task.pdf)</h4>    
+<h4 align="center">Solution for the [RELAYR Task](readme-resources/RELAYR-Task.pdf) </h4>    
       
 <p align="center">    
     <a alt="Java">    
