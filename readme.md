@@ -4,9 +4,9 @@
     RELAYR Compare Products Task    
   <br>    
 </h1>    
-    
-<h4 align="center">Solution for the </h4> [RELAYR Task](readme-resources/RELAYR-Task.pdf)    
-      
+
+## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Solution for the [RELAYR Task](readme-resources/RELAYR-Task.pdf)
+
 <p align="center">    
     <a alt="Java">    
         <img src="https://img.shields.io/badge/Java-v11-orange.svg" />    
