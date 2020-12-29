@@ -5,8 +5,8 @@
   <br>    
 </h1>    
     
-<h4 align="center">Solution for the <a href='https://drive.google.com/file/d/1ofBr27hs6nyRcxLNy35AqrKw-5QVIFRq/view?usp=sharing/'>RELAYR Task</a></h4>    
-    
+<h4 align="center">Solution for the [RELAYR Task](readme-resources/RELAYR-Task.pdf)</h4>    
+      
 <p align="center">    
     <a alt="Java">    
         <img src="https://img.shields.io/badge/Java-v11-orange.svg" />    
@@ -65,7 +65,7 @@
   
 ## Architecture ## 
 - ## Intuitive approach ##    
-  ![](readme-imgs/intuitive-approach.png)  
+  ![](readme-resources/intuitive-approach.png)  
 
 - We could consider 2 main micro-services :  
 	- **Products Search Service** : aim to respond for the search products requests based on the parameters (name, and categroy name)  
@@ -85,7 +85,7 @@ This leads to :
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Sort the products according to their suppliers ranks  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Return the first **K** bests products
 - ## Chosen approach ##  
-  ![](readme-imgs/chosen-approach.png)  
+  ![](readme-resources/chosen-approach.png)  
   
      We introduce a **Message Broker** like **Kafka** or **RabbitMQ**.
        
@@ -100,7 +100,7 @@ This leads to :
 ## Model ##    
 We consider 3 documents :
 
-![](readme-imgs/models.png)               
+![](readme-resources/models.png)               
 ## Project structure ##  
 The project is configured as a Gradle multi-modules (sub-projects) :  
 - **lib-base-test** : contains base **Class** for the integration tests  
@@ -150,7 +150,7 @@ $ docker-compose up -d
 ```
 **Expected result** :
 
-![](readme-imgs/services.png)  
+![](readme-resources/services.png)  
 ## Rest API ##  
 **Swagger Documentation URL** for each service :
 ```sh  
